@@ -5,6 +5,7 @@ import streamlit as st
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
+from chromadb.config import Settings
 from langchain_groq import ChatGroq
 from langchain_community.document_loaders import PyPDFLoader
 
@@ -51,7 +52,11 @@ if api_key:
         splitter = RecursiveCharacterTextSplitter(chunk_size=4000, chunk_overlap=300)
         splits = splitter.split_documents(documents)
 
-        vectorstore = Chroma.from_documents(splits, embeddings)
+        vectorstore = Chroma.from_documents(
+            splits,
+            embeddings,
+            client_settings=Settings(
+        chroma_db_impl="duckdb",
         retriever = vectorstore.as_retriever()
 
         contextualize_q_prompt = ChatPromptTemplate.from_messages([
