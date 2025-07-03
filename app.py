@@ -1,4 +1,5 @@
 import os
+os.environ["CHROMA_TELEMETRY_ENABLED"] = "false"
 from dotenv import load_dotenv
 import streamlit as st
 from langchain_text_splitters import RecursiveCharacterTextSplitter
