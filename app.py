@@ -56,8 +56,8 @@ if api_key:
             splits,
             embeddings,
             client_settings=Settings(
-        chroma_db_impl="duckdb",
-    )
+        chroma_db_impl="duckdb",)
+        )
         retriever = vectorstore.as_retriever()
 
         contextualize_q_prompt = ChatPromptTemplate.from_messages([
